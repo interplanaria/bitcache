@@ -1,0 +1,17 @@
+{
+  "name": "bitcache",
+  "version": "0.0.4",
+  "description": "A Peer-to-Peer Electronic Cache System for Bitcoin",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "planaria corp",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "event-stream": "^4.0.1",
+    "eventsource": "^1.0.7",
+    "reconnecting-eventsource": "^1.0.4"
+  }
+}
