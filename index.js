@@ -25,14 +25,24 @@ const init = async (c) => {
         txt.queue.add({ type: 'bus', data: data })
       },
       onend: () => {
-        // socket after bus
-        if (c.socket) {
-          const bitsocket = new Bitsocket(c.socket)
-          bitsocket.start((data) => {
-            txt.queue.add({ type: 'socket', data: data })
+        let interval = setInterval(() => {
+          txt.status().then((status) => {
+            console.log("status = ", status)
+            if (!status || status && status.queue.size === 0) {
+              console.log("queue empty. ready to listen...")
+              clearInterval(interval)
+              if (c.socket) {
+                console.log("bitsocket start listening...")
+                const bitsocket = new Bitsocket(c.socket)
+                bitsocket.start((data) => {
+                  txt.queue.add({ type: 'socket', data: data })
+                })
+              }
+              console.log("bitbus start listening...")
+              bitbus.listen()
+            }
           })
-        }
-        bitbus.listen()
+        }, 1000)
       },
     })
   } else if (c.socket) {
