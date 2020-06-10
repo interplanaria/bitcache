@@ -15,11 +15,29 @@ class Txt {
     this.queue = new Set()
   }
   async last () {
-    let res = await axios.get(this.url + "/" + this.channel + "/json?at=-null&limit=1")
-    if (res.data.result.length > 0) {
-      return res.data.result[0].i
-    } else {
-      return null;
+    try {
+      let res = await axios.get(this.url + "/" + this.channel + "/json?at=-null&limit=1")
+      if (res.data.result.length > 0) {
+        return res.data.result[0].i
+      } else {
+        return null;
+      }
+    } catch (e) {
+      console.log("error : last()", e)
+      process.exit(1)
+    }
+  }
+  async status () {
+    try {
+      let res = await axios.get(this.url + "/status")
+      if (res.data) {
+        return res.data
+      } else {
+        return null;
+      }
+    } catch (e) {
+      console.log("error : status()", e)
+      process.exit(1)
     }
   }
   async start (fn) {
@@ -33,8 +51,10 @@ class Txt {
       }
       let result = await f(o)
       if (result) {
+        let channel = (result.channel ? result.channel : this.channel)
+        if (result.channel) delete result.channel
         let res = await axios.post(this.url + "/api", {
-          channel: this.channel,
+          channel: channel,
           set: { [o.tx.h]: result }
         }, { headers: this.headers })
       } else {
