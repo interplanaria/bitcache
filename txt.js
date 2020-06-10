@@ -13,6 +13,7 @@ class Txt {
     this.channel = (o.channel ? o.channel : "txt")
     this.headers = o.headers
     this.queue = new Set()
+    this.transform = o.transform || function (x,y){return x}
   }
   async last () {
     let res = await axios.get(this.url + "/" + this.channel + "/json?at=-null&limit=1")
@@ -32,6 +33,7 @@ class Txt {
         }
       }
       let result = await f(o)
+      result = await this.transform(result, getTXT)
       if (result) {
         let res = await axios.post(this.url + "/api", {
           channel: this.channel,
@@ -45,6 +47,9 @@ class Txt {
     setTimeout(() => {
       this.start(fn)
     }, 1000)
+  };
+  async getTXT (path) {
+    return await axios.get(this.url + path)
   };
 };
 module.exports = Txt
