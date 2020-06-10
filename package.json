@@ -1,6 +1,6 @@
 {
   "name": "bitcache",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A Peer-to-Peer Electronic Cache System for Bitcoin",
   "main": "index.js",
   "scripts": {
