@@ -16,7 +16,8 @@ class Txt {
   }
   async last () {
     try {
-      let res = await axios.get(this.url + "/" + this.channel + "/json?at=-null&limit=1")
+      let res = await axios.get(this.url + "/_/_/json?at=-null&limit=1")
+      console.log("#last = ", res.data)
       if (res.data.result.length > 0) {
         return res.data.result[0].i
       } else {
