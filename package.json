@@ -9,7 +9,7 @@
   "author": "planaria corp",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "event-stream": "^4.0.1",
     "eventsource": "^1.0.7",
     "reconnecting-eventsource": "^1.0.4"
