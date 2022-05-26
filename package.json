@@ -11,7 +11,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "event-stream": "^4.0.1",
-    "eventsource": "^1.0.7",
+    "eventsource": "^2.0.2",
     "reconnecting-eventsource": "^1.0.4"
   }
 }
